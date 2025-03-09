@@ -25,12 +25,19 @@ obj.subscriptionDetails = {
     "startDate": "2024-01-01T00:00:00Z",
     "endDate": "2099-12-31T23:59:59Z",
     "autoRenew": false,
-    "paymentStatus": "PAID"
+    "paymentStatus": "PAID",
+    "platform": "iOS",
+    "purchaseSource": "AppStore"
 };
 obj.verificationBypass = true;
 obj.proAccess = true;
 obj.accountLevel = "premium";
 obj.cloudSyncEnabled = true;
+obj.entitlement = {
+    "pro": true,
+    "enterprise": false,
+    "trial": false
+};
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
