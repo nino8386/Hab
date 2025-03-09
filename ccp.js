@@ -17,6 +17,8 @@ obj.planId = "vip_lifetime";
 obj.region = "global";
 obj.userId = "123456789";
 obj.subscriptionType = "lifetime";
+obj.commerceStatus = "SUBSCRIBED";
+obj.passportVerified = true;
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
