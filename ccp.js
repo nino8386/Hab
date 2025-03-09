@@ -1,52 +1,36 @@
-let obj = JSON.parse($response.body);
+[General]
+bypass-system = true
+skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com
+tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16
+dns-server = 8.8.8.8, 8.8.4.4
+fallback-dns-server = 1.1.1.1, 9.9.9.9
+ipv6 = false
 
-// Giả lập gói Pro hợp lệ
-obj.isPro = true;
-obj.subscription = "lifetime";
-obj.expiry = "2099-12-31T23:59:59Z";
+[Rule]
+DOMAIN-SUFFIX,capcut.com,DIRECT
+DOMAIN-SUFFIX,capcutapi.com,DIRECT
+DOMAIN-SUFFIX,passport16-normal-sg.capcutapi.com,DIRECT
+DOMAIN-SUFFIX,feed16-normal-myb.capcutapi.com,DIRECT
+DOMAIN-SUFFIX,tnc-sg.capcutapi.com,DIRECT
+DOMAIN-SUFFIX,subscription.capcutapi.com,DIRECT
+DOMAIN-SUFFIX,purchase.capcutapi.com,DIRECT
+DOMAIN-SUFFIX,pay16-normal-alisg.pipopay.com,DIRECT
+DOMAIN-SUFFIX,firebaseappcheck.googleapis.com,REJECT
+GEOIP,CN,DIRECT
+IP-CIDR,0.0.0.0/0,DIRECT
+IP-CIDR6,::/0,DIRECT
 
-// Thêm thông tin đăng ký để tránh lỗi xác minh
-obj.planType = "VIP";
-obj.status = "ACTIVE";
-obj.purchaseToken = "fake_purchase_token_98765";
-obj.features = ["premium", "no_ads", "hd_export", "4k_editing", "pro_music", "cloud_sync"];
-obj.valid = true;
-obj.validUntil = "2099-12-31T23:59:59Z";
-obj.renewal = false;
-obj.planId = "vip_lifetime";
-obj.region = "global";
-obj.userId = "123456789";
-obj.subscriptionType = "lifetime";
-obj.commerceStatus = "SUBSCRIBED";
-obj.passportVerified = true;
-obj.isSubscribed = true;
-obj.planStatus = "ACTIVE";
-obj.subscriptionDetails = {
-    "startDate": "2024-01-01T00:00:00Z",
-    "endDate": "2099-12-31T23:59:59Z",
-    "autoRenew": false,
-    "paymentStatus": "PAID",
-    "platform": "iOS",
-    "purchaseSource": "AppStore",
-    "transactionId": "fake_txn_123456",
-    "verificationStatus": "verified"
-};
-obj.verificationBypass = true;
-obj.proAccess = true;
-obj.accountLevel = "premium";
-obj.cloudSyncEnabled = true;
-obj.entitlement = {
-    "pro": true,
-    "enterprise": false,
-    "trial": false
-};
-obj.serverVerification = "bypass";
-obj.licenseKey = "valid-pro-key-98765";
-obj.firebaseBypass = true;
-obj.firebaseVerification = "approved";
+[Rewrite]
+^https?:\/\/subscription.capcutapi.com\/verify url script-response-body https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/ccp.js
+^https?:\/\/purchase.capcutapi.com\/.* url script-response-body https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/ccp.js
 
-// Ghi log kiểm tra
-console.log("CapCut Pro Fully Activated!");
+[Script]
+subscription_fix = type=http-response,pattern=^https?:\/\/subscription.capcutapi.com\/verify,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/ccp.js
+purchase_fix = type=http-response,pattern=^https?:\/\/purchase.capcutapi.com\/.*,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/ccp.js
 
-$done({body: JSON.stringify(obj)});
+delete_header_subscription = type=http-request,pattern=^https?:\/\/subscription.capcutapi.com\/.*,script-path=https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/deleteheader.js
+delete_header_purchase = type=http-request,pattern=^https?:\/\/purchase.capcutapi.com\/.*,script-path=https://raw.githubusercontent.com/nino8386/Hab/refs/heads/main/deleteheader.js
+
+[MITM]
+hostname = %APPEND% subscription.capcutapi.com, purchase.capcutapi.com
 
