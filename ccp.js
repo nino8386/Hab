@@ -9,7 +9,7 @@ obj.expiry = "2099-12-31T23:59:59Z";
 obj.planType = "VIP";
 obj.status = "ACTIVE";
 obj.purchaseToken = "fake_token_12345";
-obj.features = ["premium", "no_ads", "hd_export", "4k_editing", "pro_music"];
+obj.features = ["premium", "no_ads", "hd_export", "4k_editing", "pro_music", "cloud_sync"];
 obj.valid = true;
 obj.validUntil = "2099-12-31T23:59:59Z";
 obj.renewal = false;
@@ -24,10 +24,13 @@ obj.planStatus = "ACTIVE";
 obj.subscriptionDetails = {
     "startDate": "2024-01-01T00:00:00Z",
     "endDate": "2099-12-31T23:59:59Z",
-    "autoRenew": false
+    "autoRenew": false,
+    "paymentStatus": "PAID"
 };
 obj.verificationBypass = true;
 obj.proAccess = true;
+obj.accountLevel = "premium";
+obj.cloudSyncEnabled = true;
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
