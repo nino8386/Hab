@@ -39,6 +39,8 @@ obj.entitlement = {
     "enterprise": false,
     "trial": false
 };
+obj.serverVerification = "bypass";
+obj.licenseKey = "valid-pro-key-98765";
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
