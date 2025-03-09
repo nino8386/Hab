@@ -19,6 +19,13 @@ obj.userId = "123456789";
 obj.subscriptionType = "lifetime";
 obj.commerceStatus = "SUBSCRIBED";
 obj.passportVerified = true;
+obj.isSubscribed = true;
+obj.planStatus = "ACTIVE";
+obj.subscriptionDetails = {
+    "startDate": "2024-01-01T00:00:00Z",
+    "endDate": "2099-12-31T23:59:59Z",
+    "autoRenew": false
+};
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
