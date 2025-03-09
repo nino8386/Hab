@@ -8,3 +8,4 @@ delete modifiedHeaders["Referer"];
 delete modifiedHeaders["Cookie"];
 
 $done({headers: modifiedHeaders});
+
