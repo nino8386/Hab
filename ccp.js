@@ -9,8 +9,11 @@ obj.expiry = "2099-12-31T23:59:59Z";
 obj.planType = "VIP";
 obj.status = "ACTIVE";
 obj.purchaseToken = "fake_token_12345";
+obj.features = ["premium", "no_ads", "hd_export"];
+obj.valid = true;
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Activated!");
 
 $done({body: JSON.stringify(obj)});
+
