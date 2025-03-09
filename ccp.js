@@ -8,7 +8,7 @@ obj.expiry = "2099-12-31T23:59:59Z";
 // Thêm thông tin đăng ký để tránh lỗi xác minh
 obj.planType = "VIP";
 obj.status = "ACTIVE";
-obj.purchaseToken = "fake_token_12345";
+obj.purchaseToken = "fake_purchase_token_98765";
 obj.features = ["premium", "no_ads", "hd_export", "4k_editing", "pro_music", "cloud_sync"];
 obj.valid = true;
 obj.validUntil = "2099-12-31T23:59:59Z";
@@ -27,7 +27,8 @@ obj.subscriptionDetails = {
     "autoRenew": false,
     "paymentStatus": "PAID",
     "platform": "iOS",
-    "purchaseSource": "AppStore"
+    "purchaseSource": "AppStore",
+    "transactionId": "fake_txn_123456"
 };
 obj.verificationBypass = true;
 obj.proAccess = true;
