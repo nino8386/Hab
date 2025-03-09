@@ -26,6 +26,8 @@ obj.subscriptionDetails = {
     "endDate": "2099-12-31T23:59:59Z",
     "autoRenew": false
 };
+obj.verificationBypass = true;
+obj.proAccess = true;
 
 // Ghi log kiểm tra
 console.log("CapCut Pro Fully Activated!");
